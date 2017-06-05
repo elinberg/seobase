@@ -263,7 +263,7 @@ function createPostElement(postId, title, text, author, authorId, authorPic) {
   // Create new comment.
   addCommentForm.onsubmit = function(e) {
     e.preventDefault();
-    console.log(firebase.auth().providerData)
+    console.log(firebase.auth().providerData);
     createNewComment(postId, firebase.auth().currentUser.displayName, uid, commentInput.value);
     commentInput.value = '';
     commentInput.parentElement.MaterialTextfield.boundUpdateClassesHandler();
@@ -456,6 +456,28 @@ function onAuthStateChanged(user) {
 
   cleanupUi();
   if (user) {
+    if(user.displayName ){
+      var displayName;
+      var profilePic;
+      user.providerData.forEach(function (profile) {
+          console.log("Sign-in provider: "+profile.providerId);
+          console.log("  Provider-specific UID: "+profile.uid);
+          console.log("  Name: "+profile.displayName);
+          displayName =  profile.displayName;
+          profilePic = profile.photoURL;
+          console.log("  Email: "+profile.email);
+          console.log("  Photo URL: "+profile.photoURL);
+        });
+
+
+    user.updateProfile({displayName:displayName, photoURL:profilePic}).then(
+                function(){
+                  console.log( displayName);
+                },function(error){
+                    console.log(error);
+                });
+    };
+    
     currentUID = user.uid;
     splashPage.style.display = 'none';
     writeUserData(user.uid, user.displayName, user.email, user.photoURL);
