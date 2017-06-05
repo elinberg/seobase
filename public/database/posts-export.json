@@ -1,0 +1,21 @@
+{
+  "-KlovN_chyU9kt529FxH" : {
+    "author" : "elinberg",
+    "authorPic" : "/eric.png",
+    "body" : "Testing Import",
+    "starCount" : 0,
+    "title" : "This is a new test",
+    "uid" : "BaOgNsBiQXYIyLDNdgzO4QPZcEx2"
+  },
+  "-KlozmWFVMrvac-j94ZJ" : {
+    "author" : "elinberg",
+    "authorPic" : "/eric.png",
+    "body" : "Linberg",
+    "starCount" : 1,
+    "stars" : {
+      "BaOgNsBiQXYIyLDNdgzO4QPZcEx2" : true
+    },
+    "title" : "Eric",
+    "uid" : "BaOgNsBiQXYIyLDNdgzO4QPZcEx2"
+  }
+}
