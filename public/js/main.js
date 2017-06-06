@@ -58,10 +58,10 @@ function writeNewPost(uid, username, picture, title, body) {
     starCount: 0,
     authorPic: picture
   };
-console.log(postData)
+
   // Get a key for a new Post.
   var newPostKey = firebase.database().ref().child('posts').push().key;
-console.log(newPostKey)
+
   // Write the new post's data simultaneously in the posts list and the user's post list.
   var updates = {};
   updates['/posts/' + newPostKey] = postData;
@@ -101,7 +101,7 @@ function toggleStar(postRef, uid) {
  *
  **/
 
-function createHistoryElement(postId, username, lastVisitTime, title, typedCount, url) {
+function createHistoryElement(author,authorPic,postId, username, lastVisitTime, title, typedCount, url) {
   var uid = firebase.auth().currentUser.uid;
 
   var html =
@@ -109,23 +109,26 @@ function createHistoryElement(postId, username, lastVisitTime, title, typedCount
         'mdl-cell--6-col-tablet mdl-cell--4-col-desktop mdl-grid mdl-grid--no-spacing">' +
         '<div class="mdl-card mdl-shadow--2dp">' +
           '<div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">' +
-            '<h4 class="mdl-card__title-text"></h4>' +
+            '<div>' +
+              '<div class="avatar"></div>' +
+              '<div class="username mdl-color-text--black"></div>' +
+            '</div>' +
           '</div>' +
           '<div class="header">' +
-            '<div>' +
-              '<div class="username mdl-color-text--black"></div>' +
-                        '<div class="title"></div>' +
-          '<div class="url"></div>' +
-          '<div class="lastVisitedTime">'+lastVisitTime+'</div>' +
-          '<div class="typedCount">'+typedCount+'</div>' +
-            '</div>' +
+            '<h4 class="mdl-card__title-text"></h4>' +
           '</div>' +
           '<span class="star">' +
             '<div class="not-starred material-icons">star_border</div>' +
             '<div class="starred material-icons">star</div>' +
             '<div class="star-count">0</div>' +
           '</span>' +
-
+          '<div class="username mdl-color-text--black"></div>' +
+            '<div class="title"></div>' +
+            '<div class="url"></div>' +
+            '<div class="lastVisitedTime">'+lastVisitTime+'</div>' +
+            '<div class="typedCount">'+typedCount+'</div>' +
+          '</div>' +
+          '</div>' +
       '</div>';
 
   // Create the DOM element from the HTML.
@@ -144,12 +147,13 @@ function createHistoryElement(postId, username, lastVisitTime, title, typedCount
   historyElement.getElementsByClassName('title')[0].innerText = title;
   historyElement.getElementsByClassName('url')[0].innerText = url;
   historyElement.getElementsByClassName('mdl-card__title-text')[0].innerText = title;
-  historyElement.getElementsByClassName('username')[0].innerText = username || 'Anonymous';
-
+  historyElement.getElementsByClassName('username')[0].innerText = author || 'Anonymous';
+  historyElement.getElementsByClassName('avatar')[0].style.backgroundImage = 'url("' +
+      (authorPic || './silhouette.jpg') + '")';
 
 
   // Listen for the starred status.
-  var starredStatusRef = firebase.database().ref('history/' + postId + '/typedCount/' + uid)
+  var starredStatusRef = firebase.database().ref('history/' + postId + '/typedCount/' + uid);
   starredStatusRef.on('value', function(snapshot) {
     updateStarredByCurrentUser(historyElement, snapshot.val());
   });
@@ -181,13 +185,14 @@ function createPostElement(postId, title, text, author, authorId, authorPic) {
                   'mdl-cell--6-col-tablet mdl-cell--4-col-desktop mdl-grid mdl-grid--no-spacing">' +
         '<div class="mdl-card mdl-shadow--2dp">' +
           '<div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">' +
-            '<h4 class="mdl-card__title-text"></h4>' +
-          '</div>' +
-          '<div class="header">' +
-            '<div>' +
+              '<div>' +
               '<div class="avatar"></div>' +
               '<div class="username mdl-color-text--black"></div>' +
             '</div>' +
+            
+          '</div>' +
+          '<div class="header">' +
+          '<h4 class="mdl-card__title-text"></h4>' +
           '</div>' +
           '<span class="star">' +
             '<div class="not-starred material-icons">star_border</div>' +
@@ -351,8 +356,9 @@ function startDatabaseQueries() {
   // [START my_top_posts_query]
   var myUserId = firebase.auth().currentUser.uid;
 
-  var topUserPostsRef = firebase.database().ref('history').orderByChild('lastVisitTime');
-  
+  var topUserPostsRef = firebase.database().ref('history').orderByValue();
+
+
   // [END my_top_posts_query]
   // [START recent_posts_query]
   var recentPostsRef = firebase.database().ref('posts').limitToLast(100);
@@ -360,16 +366,17 @@ function startDatabaseQueries() {
   var userPostsRef = firebase.database().ref('user-posts/' + myUserId);
 
   var fetchHistory = function(historyRef, sectionElement) {
+
     historyRef.on('child_added', function(data) {
       var title = data.val().title || "";
       var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
       containerElement.insertBefore(
-          createHistoryElement(data.key, data.val().email, data.val().lastVisitTime, title, data.val().typedCount, data.val().url),
+          createHistoryElement(data.val().author,data.val().authorPic,data.key, data.val().email, data.val().lastVisitTime, title, data.val().typedCount, data.val().url),
           containerElement.firstChild);
     });
     historyRef.on('child_removed', function(data) {
-    var containerElement = sectionElement.getElementsByClassName('history-container')[0];
-    var post = containerElement.getElementsByClassName('post-' + data.key)[0];
+    var containerElement = sectionElement.getElementsByClassName('postsaononon-container')[0];
+    var post = containerElement.getElementsByClassName('history-' + data.key)[0];
     post.parentElement.removeChild(post);
     });
   }
@@ -456,7 +463,7 @@ function onAuthStateChanged(user) {
 
   cleanupUi();
   if (user) {
-    if(!user.displayName || user.photoURL  ){
+    if(!user.displayName || !user.photoURL  ){
       var displayName;
       var profilePic;
       user.providerData.forEach(function (profile) {
