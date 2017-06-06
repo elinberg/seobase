@@ -375,7 +375,7 @@ function startDatabaseQueries() {
           containerElement.firstChild);
     });
     historyRef.on('child_removed', function(data) {
-    var containerElement = sectionElement.getElementsByClassName('postsaononon-container')[0];
+    var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
     var post = containerElement.getElementsByClassName('history-' + data.key)[0];
     post.parentElement.removeChild(post);
     });
