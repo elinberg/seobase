@@ -105,7 +105,7 @@ function createHistoryElement(author,authorPic,postId, username, lastVisitTime, 
   var uid = firebase.auth().currentUser.uid;
 
   var html =
-      '<div class="post history-' + postId + ' mdl-cell mdl-cell--12-col ' +
+      '<div class="post post-' + postId + ' mdl-cell mdl-cell--12-col ' +
         'mdl-cell--6-col-tablet mdl-cell--4-col-desktop mdl-grid mdl-grid--no-spacing">' +
         '<div class="mdl-card mdl-shadow--2dp">' +
           '<div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">' +
