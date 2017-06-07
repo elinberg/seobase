@@ -463,7 +463,7 @@ function onAuthStateChanged(user) {
 
   cleanupUi();
   if (user) {
-    if(!user.displayName || !user.photoURL  ){
+    if(user ){
       var displayName;
       var profilePic;
       user.providerData.forEach(function (profile) {
