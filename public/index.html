@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <!--
   Copyright 2016 Google Inc. All rights reserved.
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
   <meta name="description" content="Real time Peer to Peer SEO network and resource for cutting edge SEO Research">
   <meta name="keywords" content="seo research, peer to peer network, serp, ctr, link juice, web, mobile" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEOCBase P2P SEO Research Network</title>
+  <title>SEOBase P2P SEO Research Network</title>
 
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
@@ -39,9 +39,11 @@
   <meta name="msapplication-navbutton-color" content="#303F9F">
 
   <!-- Material Design Lite -->
+  <link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono|Noto+Sans|Roboto" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-orange.min.css">
   <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
   <link rel="stylesheet" href="main.css">
 
@@ -116,6 +118,47 @@
       </div>
     </section>
 
+    <!-- Show the add post form -->
+    <section class="mdl-grid content" id="add-posting" style="display:none">
+      <div class="mdl-cell mdl-cell--12-col mdl-grid">
+
+          <!-- Card containing the inputs to add a new messages -->
+          <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet
+                  mdl-cell--6-col-desktop">
+            <div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">
+              <h2 class="mdl-card__title-text">New Post</h2>
+            </div>
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <form id="setup-form" action="#">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="new-post-title2">
+                  <label class="mdl-textfield__label" for="new-post-title">Post title...</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" id="new-post-keyword"></input>
+                  <label class="mdl-textfield__label" for="new-post-keyword">Keyword or Search Phrase..</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input"  id="new-post-destination_url"></input>
+                  <label class="mdl-textfield__label" for="new-post-destination_url">Destination Website.</label>
+                </div>
+                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" id="new-post-clickon"></input>
+                  <label class="mdl-textfield__label" for="new-post-clickon">Destination Internal Click.</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <textarea class="mdl-textfield__input" rows="4" id="new-post-comment"></textarea>
+                  <label class="mdl-textfield__label" for="new-post-comment">Comment...</label>
+                </div>
+                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                  Add post
+                </button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Show a list of recent posts -->
     <section class="mdl-grid content" id="recent-posts-list" style="display:none">
       <div class="posts-container mdl-cell mdl-cell--12-col mdl-grid">
@@ -135,7 +178,10 @@
     </section>
   </main>
 </div>
-
+<div><div id="dest"></div></div>
+<div id="target">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis eleifend elit. Donec lectus sem, scelerisque sit amet facilisis quis, gravida a lacus. Nunc at lorem egestas, gravida lorem quis, pulvinar ante. Quisque id tempus libero. Mauris hendrerit nunc risus, ac laoreet lectus gravida et. Nam euismod magna ac enim posuere sagittis. Fusce at egestas enim, eu hendrerit enim.
+</div>
 <!-- Import and configure the Firebase SDK -->
 <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
 <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->

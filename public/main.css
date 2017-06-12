@@ -112,7 +112,67 @@ h3 {
     margin-right: 10px;
     background-image: url('./silhouette.jpg');
 }
+.author {
+    display: inline-block;
+    line-height: 38px;
+    vertical-align: top;
+    width: calc(100% - 46px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
 .username {
+    display: inline-block;
+    line-height: 38px;
+    vertical-align: top;
+    width: calc(100% - 46px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.email {
+    display: inline-block;
+    line-height: 38px;
+    vertical-align: top;
+    width: calc(100% - 46px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.lastVistedTime {
+    display: inline-block;
+    line-height: 38px;
+    vertical-align: top;
+    width: calc(100% - 46px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.title {
+    display: inline-block;
+    line-height: 38px;
+    vertical-align: top;
+    width: calc(100% - 46px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.typedCount {
+    display: inline-block;
+    line-height: 38px;
+    vertical-align: top;
+    width: calc(100% - 46px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+.url {
     display: inline-block;
     line-height: 38px;
     vertical-align: top;
@@ -237,10 +297,33 @@ h3 {
     color: grey;
     line-height: 25px;
 }
-.comments-container .username {
+.comments-container .author {
+    line-height: 25px;
+    /*width: auto;*/
+}
+.comments-container .email {
+    line-height: 25px;
+    /*width: auto;*/
+}
+.comments-container .author {
+    line-height: 25px;
+    width: auto;
+}
+.comments-container .authorPic {
+    line-height: 25px;
+    width: auto;
+}
+.comments-container .lastVisitedTime {
+    line-height: 25px;
+    width: auto;
+}
+.comments-container .title {
     line-height: 25px;
 }
-
+.comments-container .url {
+    line-height: 25px;
+    width: auto;
+}
 /* Post */
 
 .post .mdl-card {
@@ -315,4 +398,23 @@ h3 {
     align-items: center;
     color: white;
     flex-direction: column;
+}
+
+
+
+canvas{
+    /*width:294px !important;*/
+    /*height:60px !important;*/
+    font-family: 'Droid Sans Mono', monospace;
+    /*font-family: "'Noto', sans-serif";*/
+    background:#fff !important;
+    color:#000 !important;
+    padding-left:5px !important;
+    padding-right:15px !important;
+    word-wrap: break-word;
+    /*z-index:-100;*/
+    font-size: 18px;
+    /*text-align:left;
+    vertical-align: top;*/
+
 }
