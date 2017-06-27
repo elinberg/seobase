@@ -222,7 +222,7 @@ function toggleStar(postRef, uid) {
  *
  **/
 
-function createHistoryElement(author, authorPic, postId, username, lastVisitTime, title, typedCount, url) {
+function createHistoryElement(author, authorPic, postId, username, lastVisitTime, title, typedCount, url, timeStamp) {
   var uid = firebase.auth().currentUser.uid;
 
   var html =
@@ -247,6 +247,7 @@ function createHistoryElement(author, authorPic, postId, username, lastVisitTime
     '<div class="title"></div>' +
     '<div class="url"></div>' +
     '<div class="lastVisitedTime">' + lastVisitTime + '</div>' +
+    '<div class="timeStamp">' + timeStamp + '</div>' +
     '<div class="typedCount">' + typedCount + '</div>' +
     '</div>' +
     '<form>' +
@@ -525,9 +526,10 @@ function startDatabaseQueries() {
 
     historyRef.on('child_added', function (data) {
       var title = data.val().title || "";
+      var timeStamp = data.val().timestamp || "";
       var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
       containerElement.insertBefore(
-        createHistoryElement(data.val().author, data.val().authorPic, data.key, data.val().email, data.val().lastVisitTime, title, data.val().typedCount, data.val().url),
+        createHistoryElement(data.val().author, data.val().authorPic, data.key, data.val().email, data.val().lastVisitTime, title, data.val().typedCount, data.val().url,timeStamp),
         containerElement.firstChild);
     });
     historyRef.on('child_removed', function (data) {
